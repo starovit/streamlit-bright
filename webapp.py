@@ -1,14 +1,9 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
-from pipeline import data_pipeline, class_predict
+from pipeline import data_prepare, class_predict
 import matplotlib.pyplot as plt
 import numpy as np
-
-y = np.array([35, 25, 25, 15])
-
-plt.pie(y)
-plt.show() 
 
 
 
@@ -31,17 +26,19 @@ if "file" in locals():
         pil_object = Image.open(file).convert("RGB")
         col1.image(pil_object)
         rgb_image = np.asarray(pil_object)
-        x = data_pipeline(rgb_image)
+        x, fig_zones = data_prepare(rgb_image)
         y = round(class_predict(x), 2)
 
         class_1 = 100*y
         class_0 = 100-(100*y)
         col2.text(f"Probability of class 1 (good image): {class_1})")
         col2.text(f"Probability of class 0 (bad image): {class_0}")
-        fig, ax = plt.subplots()
+
+        fig_pie, ax = plt.subplots()
         ax.pie([class_1, class_0], labels=["Class 1: good image",
                                            "Class 0: bad image"])
-        col2.pyplot(fig)
+        col2.pyplot(fig_pie)
+        col2.pyplot(fig_zones)
 
     except:
         "-"

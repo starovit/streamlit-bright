@@ -3,14 +3,11 @@ import cv2
 import json
 import numpy as np
 
-
 # save utils
-def save_figure(image: np.ndarray,
+def create_figure(image: np.ndarray,
                 areas_mask: dict,
                 areas_histogram: dict,
-                areas_center: dict,
-                output_path: str,
-                show = False):
+                areas_center: dict):
     """
     Create a visualization for different areas of a bright image, add contours, and text annotations,
     and save it to the specified output path.
@@ -27,11 +24,9 @@ def save_figure(image: np.ndarray,
         area_mask = {'area1': np.array([...]), 'area2': np.array([...]), ...}  # Masks for each area
         area_histogram = {'area1': np.array([...]), 'area2': np.array([...]), ...}  # Histograms for each area
         area_center = {'area1': (x1, y1), 'area2': (x2, y2), ...}  # Centroid coordinates for each area
-        output_path = "/path/to/output/image.png"
-        save_figure(bright_image, area_mask, area_histogram, area_center, output_path)
     """
     
-    plt.figure(figsize=(6,6))
+    fig = plt.figure(figsize=(6,6))
     plt.axis('off')
 
     # Display the image
@@ -55,14 +50,7 @@ def save_figure(image: np.ndarray,
                      size=6, color='purple', alpha=1, backgroundcolor = "white")
     
     # Save the figure to the specified output path.
-    plt.savefig(output_path, pad_inches=0, bbox_inches="tight")
-    if show == True:
-        plt.show()
-    else:
-        plt.close()
-
-
-
+    return fig
 
 
 
