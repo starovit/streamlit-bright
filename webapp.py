@@ -22,6 +22,7 @@ elif option == "None":
 if "file" in locals():
     st.text(option.capitalize())
     try:
+        col2.text(type(file))
         pil_object = Image.open(file).convert("RGB")
         col1.image(pil_object)
         rgb_image = np.asarray(pil_object)
