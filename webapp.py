@@ -12,7 +12,7 @@ option = st.selectbox(label="Choose method: ",
 col1, col2 = st.columns(2)
 
 if option == "Upload File":
-    file = col1.file_uploader(label="Please upload your face image.")
+    file = col1.file_uploader(label="Please upload face image.")
 elif option == "Camera":
     file = col1.camera_input(label="Please take a photo")
 elif option == "None":
@@ -20,6 +20,7 @@ elif option == "None":
 
 
 if "file" in locals():
+    st.text(option.capitalize())
     try:
         pil_object = Image.open(file).convert("RGB")
         col1.image(pil_object)
