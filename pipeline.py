@@ -10,7 +10,7 @@ from PIL import Image
 
 def data_pipeline(image):
     """Numpy Image -> X for prediciton"""
-    face_detector = FaceDetector('../models/face_landmarker.task')
+    face_detector = FaceDetector('models/face_landmarker.task')
     _, _, areas_histogram = face_detector.image_pipeline(image)
     array_1d = np.array(list(areas_histogram.values())).flatten() # values to flat array
     array_1d = array_1d.reshape(1, -1)
