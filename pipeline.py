@@ -17,6 +17,8 @@ def data_pipeline(image):
     return array_1d
 
 def class_predict(array_1d, return_type="proba"):
+    with open("models/logreg.sav", "rb") as model_file:
+        logreg = pickle.load(model_file)
     logreg = pickle.load(open("models/logreg.sav", "rb"))
     if return_type == "class":
         return logreg.predict(array_1d)
