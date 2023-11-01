@@ -5,8 +5,6 @@ from pipeline import data_prepare, class_predict
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-
 st.header("Image Light Measure: ")
 option = st.selectbox(label="Choose method: ",
                       options=["None", "Camera", "Upload File"])
@@ -31,13 +29,14 @@ if "file" in locals():
 
         class_1 = 100*y
         class_0 = 100-(100*y)
-        col2.text(f"Probability of class 1 (good image): {class_1})")
         col2.text(f"Probability of class 0 (bad image): {class_0}")
+        col2.text(f"Probability of class 1 (good image): {class_1})")
+ 
 
-        fig_pie, ax = plt.subplots()
-        ax.pie([class_1, class_0], labels=["Class 1: good image",
-                                           "Class 0: bad image"])
-        col2.pyplot(fig_pie)
+        fig_bar, ax = plt.subplots()
+        ax.bar(x=[f"Bad light: {class_0}%", f"Good light: {class_1}%"],
+               height=[class_0, class_1], color=["red", "green"])
+        col2.pyplot(fig_bar)
         col2.pyplot(fig_zones)
 
     except:

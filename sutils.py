@@ -3,6 +3,9 @@ import cv2
 import json
 import numpy as np
 
+plt.rcParams.update({'font.size': 18})
+
+
 # save utils
 def create_figure(image: np.ndarray,
                 areas_mask: dict,
