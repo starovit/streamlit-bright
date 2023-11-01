@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from mputils import FaceDetector
 from PIL import Image
-import sklearn
+import scikit-learn as sklearn
 # from sutils import 
 
 
