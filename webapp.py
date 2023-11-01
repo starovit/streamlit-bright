@@ -15,9 +15,9 @@ col1, col2 = st.columns(2)
 
 if option == "Upload File":
     file = col1.file_uploader(label="Please upload your face image.")
-if option == "Camera":
+elif option == "Camera":
     file = col1.camera_input(label="Please take a photo")
-if option == "None":
+elif option == "None":
     col1.text("Please, choose method.")   
 
 
