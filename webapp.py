@@ -6,12 +6,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 st.header("Image Light Measure: ")
-option = st.selectbox(label="Choose method: ",
-                      options=["None", "Camera", "File"])
-
-col1, col2 = st.columns(2)
 
 def main_loop(file):
+    pil_object = Image.open(file).convert("RGB")
+    col1.image(pil_object)
+    rgb_image = np.asarray(pil_object)
     x, fig_zones = data_prepare(rgb_image)
     y = round(class_predict(x), 2)
 
@@ -27,22 +26,17 @@ def main_loop(file):
     col2.pyplot(fig_zones)
 
 
+option = st.selectbox(label="Choose method: ",
+                      options=["None", "Camera", "File"])
 
-if option == "File":
-    file = col1.file_uploader(label="Please upload face image.")
-    if file is not None:
-        pil_object = Image.open(file).convert("RGB")
-        col1.image(pil_object)
-        rgb_image = np.asarray(pil_object)
-        main_loop(file)
+col1, col2 = st.columns(2)
+
+if option == "None":
+    file = None
 if option == "Camera":
     file = col1.camera_input(label="Please take a photo")
-    if file:
-        st.image(file)
-    if file is not None:
-        pil_object = Image.open(file).convert("RGB")
-        col1.image(pil_object)
-        rgb_image = np.asarray(pil_object)
-        main_loop(file)
-if option == "None":
-    col1.text("Please, choose method.")
+elif option == "File":
+    file = col1.file_uploader(label="Please upload face image")
+
+if file is not None:
+    main_loop(file)
