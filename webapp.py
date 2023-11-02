@@ -35,6 +35,7 @@ if option == "None":
     file = None
 if option == "Camera":
     file = col1.camera_input(label="Please take a photo")
+    col2.text(type(file))
 elif option == "File":
     file = col1.file_uploader(label="Please upload face image")
 
