@@ -37,6 +37,7 @@ if option == "File":
         main_loop(file)
 if option == "Camera":
     file = col1.camera_input(label="Please take a photo")
+    st.text(type(file))
     if file is not None:
         pil_object = Image.open(file).convert("RGB")
         col1.image(pil_object)
